@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>IPL Auction</title>
+
+    <style>
+      /* Container styling */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Table styling */
+.table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table thead th {
+    background-color: #343a40;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table td, .table th {
+    padding: 12px;
+    text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table td {
+    border: 1px solid #ddd;
+}
+
+.table .table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Chart styling */
+.chart-container {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar styling */
+.navbar-dark .navbar-nav .nav-link {
+    color: #dcdcdc;
+    transition: color 0.3s;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #fff;
+    background-color: #495057;
+    border-radius: 4px;
+}
+
+/* Button styling */
+.btn {
+    background-color: #1f77b4;
+    color: white;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #155a8a;
+    color: #ffffff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .table, .chart-container {
+        font-size: 0.9em;
+    }
+}
+
+    </style>
+  </head>
+  <body>
+   <div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>This Data is From 2013 to 2022</h2>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <div class="container-fluid">
+                  <a class="navbar-brand" href="/">IPL Auction Dataset</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                              <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link {% if request.path == '/Top_Player' %}active{% endif %}" href="/Top_Player">Top Players</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link {% if request.path == '/TotalSpending' %}active{% endif %}" href="/TotalSpending">Total Spending</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link {% if request.path == '/budget_split' %}active{% endif %}" href="/budget_split">Budget Split</a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </nav>
+
+
+              {% block content %}
+
+              {% endblock %}
+        </div>
+    </div>
+   </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   {% block js %}
+
+   {% endblock %}
+  </body>
+</html>

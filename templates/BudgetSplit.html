@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<h2 class="my-3 fw-50">List of highest paid players in that particular year </h2>
+<form action="/budget_split_Origin" class="form-control my-5" method="post">
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">IPL Auction</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the Name of a Team" name="TeamName" required>
+        <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="Enter the Year" name="Year" required>
+        <button class="btn btn-secondary btn-sm my-3">Search</button>
+        
+
+      </div>
+</form>
+<!-- <a href="/" class="btn btn-primary btn-sm my-3">Home</a> -->
+
+
+{% if message %}
+<h3 class="mt-5">Yearly Spending Distribution by Role</h3>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Team</th>
+            <th>Role</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in message %}
+            <tr>
+                <td>{{ player['Player Origin'] }}</td>
+                <td>{{ player['Team'] }}</td>
+                <td>{{ player['Role'] }}</td>
+                <td>₹{{ player['Amount'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Display the pie charts below the table -->
+<div class="mt-5">
+    <h4>Spending by Role</h4>
+    {{ chart_role | safe }}
+</div>
+<div class="mt-5">
+    <h4>Spending by Player Origin</h4>
+    {{ chart_origin | safe }}
+</div>
+{% else %}
+<p class="text-danger mt-3">No data found for the specified year and team.</p>
+{% endif %}
+{% endblock %}
+

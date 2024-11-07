@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<h2 class="my-3 fw-50">List of highest paid players in that particular year </h2>
+<form action="/fetch_top_player" class="form-control my-5" method="post">
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">IPL Auction</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the Year" name="Year" required>
+        <button class="btn btn-secondary btn-sm my-3">Search</button>
+        
+
+      </div>
+</form>
+<!-- <a href="/" class="btn btn-primary btn-sm my-3">Home</a> -->
+
+
+{% if message %}
+<h3 class="mt-5">Year detail of top players</h3>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Amount</th>
+            <th>Team</th>
+            <th>Year</th>
+            <th>Origin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in message %}
+            <tr>
+                <td>{{ player['Player'] }}</td>
+                <td>{{ player['Role'] }}</td>
+                <td>₹{{ player['Amount'] }}</td>
+                <td>{{ player['Team'] }}</td>
+                <td>{{ player['Year'] }}</td>
+                <td>{{ player['Player Origin'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Display the pie chart below the table -->
+<div class="mt-5">
+    {{ chart | safe }}
+</div>
+
+<h3 class="mt-5">Highest-Paid Players per Team</h3>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for highestpaid in highest %}
+            <tr>
+                <td>{{ highestpaid['Player'] }}</td>
+                <td>{{ highestpaid['Team'] }}</td>
+                <td>₹{{ highestpaid['Amount'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p class="text-danger mt-3">No player found for the given year.</p>
+{% endif %}
+{% endblock %}

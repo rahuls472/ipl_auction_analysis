@@ -1,0 +1,46 @@
+
+{% extends 'main.html' %}
+
+{% block content %}
+<h2 class="my-3 fw-50">List of total money spend by teams in a particular year </h2>
+<form action="/fetch_teams" class="form-control my-5" method="post">
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">IPL Auction</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the Year" name="Year" required>
+        <button class="btn btn-secondary btn-sm my-3">Search</button>
+        
+
+      </div>
+</form>
+<!-- <a href="/" class="btn btn-primary btn-sm my-3">Home</a> -->
+
+
+{% if message %}
+    <h3 class="mt-5">Year detail of Teams</h3>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teams in message %}
+                <tr>
+                    <td>{{ teams['Year'] }}</td>
+                    <td>{{ teams['Team'] }}</td>
+                    <td>₹{{ teams['TotalAmountSpent'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Display the bar chart below the table -->
+    <div class="mt-5">
+        {{ bar | safe }}
+    </div>
+{% else %}
+    <p class="text-danger mt-3">No player found with the given name.</p>
+{% endif %}
+{% endblock%}
